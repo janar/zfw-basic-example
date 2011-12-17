@@ -1,8 +1,12 @@
 Basic components and functionality implemented in Zend Framework using its provided example.
 
 This is currently very basic functionality and lot of things are missing.
+To see some of the code working online visti http://eagerfish.eu/projects/zfw-basic-example/public/
 
-There is users table with admin user in sql folder.
+
+To setup project you have to create database and import sql file found in folder /sql. It contains users table and admin record. Also /application/configs/application.ini file must be modified to fit your environment. 
+
+
 To login as admin use:
   username: admin@admin.com
   password: admin@admin.com
