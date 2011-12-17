@@ -1,0 +1,45 @@
+<?php
+$this->headMeta()->appendHttpEquiv('Content-Type', 'text/html;charset=utf-8');
+$this->headTitle()->setSeparator(' - ');
+$this->headTitle('Zend Framework (ZFW) basic example');
+
+echo $this->doctype(); ?>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <?php echo $this->headMeta(); ?>
+    <?php echo $this->headTitle(); ?>
+    <?php echo $this->headLink()->prependStylesheet($this->baseUrl().'/css/site.css'); ?>
+</head>
+<body>
+<div id="topmenu">
+    <a href="<?php echo $this->url(array('controller'=>'index'), 'default', true) ?>">Frontpage</a> |
+    <?php
+        if($this->showUsersLink)
+        {
+            ?>
+                <a href="<?php echo $this->url(array('controller'=>'users'), 'default', true) ?>">Manage users</a> |
+            <?php
+        }
+    ?>
+    <?php
+        if($this->hasIdentity)
+        {
+            ?>
+                <a href="<?php echo $this->url(array('controller'=>'profile', 'action' => 'index'), 'default', true) ?>">Profile</a> |
+                <a href="<?php echo $this->url(array('controller'=>'profile', 'action' => 'logout'), 'default', true) ?>">Logout</a>
+            <?php
+        } else
+        {
+            ?>
+                <a href="<?php echo $this->url(array('controller'=>'profile', 'action' => 'register'), 'default', true) ?>">Register</a> |
+                <a href="<?php echo $this->url(array('controller'=>'profile', 'action' => 'login'), 'default', true) ?>">Login</a>
+            <?php
+        }
+    ?>
+</div>
+<div id="content">
+    <h1><?php echo $this->escape($this->title); ?></h1>
+    <?php echo $this->layout()->content; ?>
+</div>
+</body>
+</html>

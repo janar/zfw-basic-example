@@ -1,0 +1,11 @@
+<p>
+    Are you sure that you want to delete 
+    <?php echo $this->escape($this->user['email']); ?>
+</p>
+<form action="<?php echo $this->url(array('action'=>'delete')); ?>" method="post">
+<div>
+    <input type="hidden" name="id" value="<?php echo $this->user['id']; ?>" />
+    <input type="submit" name="answer" value="yes" />
+    <input type="submit" name="answer" value="no" />
+</div>
+</form>

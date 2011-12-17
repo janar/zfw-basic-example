@@ -1,1 +1,8 @@
 Basic components and functionality implemented in Zend Framework using its provided example.
+
+This is currently very basic functionality and lot of things are missing.
+
+There is users table with admin user in sql folder.
+To login as admin use:
+  username: admin@admin.com
+  password: admin@admin.com
