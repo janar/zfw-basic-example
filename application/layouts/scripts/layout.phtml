@@ -26,6 +26,7 @@ echo $this->doctype(); ?>
         {
             ?>
                 <a href="<?php echo $this->url(array('controller'=>'profile', 'action' => 'index'), 'default', true) ?>">Profile</a> |
+                <a href="<?php echo $this->url(array('controller'=>'profile', 'action' => 'settings'), 'default', true) ?>">Profile Settings</a> |
                 <a href="<?php echo $this->url(array('controller'=>'profile', 'action' => 'logout'), 'default', true) ?>">Logout</a>
             <?php
         } else

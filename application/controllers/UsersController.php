@@ -52,38 +52,38 @@ class UsersController extends Zend_Controller_Action
         $this->view->title = "Update user";
         $this->view->headTitle($this->view->title);
         
-        $form = new Application_Form_User("edit");
+        $form = new Application_Form_User();
         $form->submit->setLabel('Update');
         $this->view->form = $form;
 
         if ($this->getRequest()->isPost()) {
             $formData = $this->getRequest()->getPost();
             if ($form->isValid($formData)) {
-                    $id = (int)$form->getValue('id');
-                    $updateRecord = array(
-                        'email' => $form->getValue('email'),
-                        'firstname' => $form->getValue('firstname'),
-                        'lastname' => $form->getValue('lastname')
-                    );
-                    if($form->getValue('password') != ''){
-                        $updateRecord['password'] = $form->getValue('password');
-                    }
-                    
-                    $users = new Application_Model_DbTable_Users();
-                    $users->updateUser($id, $updateRecord);
+                $id = (int)$form->getValue('id');
+                $updateRecord = array(
+                    'email' => $form->getValue('email'),
+                    'firstname' => $form->getValue('firstname'),
+                    'lastname' => $form->getValue('lastname')
+                );
+                if($form->getValue('password') != ''){
+                    $updateRecord['password'] = $form->getValue('password');
+                }
+                
+                $users = new Application_Model_DbTable_Users();
+                $users->updateUser($id, $updateRecord);
 
-                    $this->_helper->redirector('index');
+                $this->_helper->redirector('index');
             } else {
-                    $form->populate($formData);
+                $form->populate($formData);
             }
         } else {
-                $id = $this->_getParam('id', 0);
-                if ($id > 0) {
-                    $users = new Application_Model_DbTable_Users();
-                    $currentUserRecord = $users->getUser($id);
-                    unset($currentUserRecord['password']);
-                    $form->populate($currentUserRecord);
-                }
+            $id = $this->_getParam('id', 0);
+            if ($id > 0) {
+                $users = new Application_Model_DbTable_Users();
+                $currentUserRecord = $users->getUser($id);
+                unset($currentUserRecord['password']);
+                $form->populate($currentUserRecord);
+            }
         }
 
     }

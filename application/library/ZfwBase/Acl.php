@@ -23,7 +23,7 @@ class ZfwBase_Acl extends Zend_Acl {
         $this->allow('guest', 'index');
 
 
-        $this->allow('user', 'profile', array('index', 'logout'));
+        $this->allow('user', 'profile', array('index', 'logout', 'settings'));
 
         //admin can access everything
         $this->allow('admin');
