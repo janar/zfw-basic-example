@@ -17,7 +17,7 @@ class Application_Form_Login extends Zend_Form
               ->addValidator('EmailAddress')
               ->addValidator('NotEmpty');
 
-        $pwd = new Zend_Form_Element_Text('password');
+        $pwd = new Zend_Form_Element_Password('password');
         $pwd->setLabel('Password')
               ->setRequired(true)
               ->addValidator('NotEmpty');

@@ -26,11 +26,14 @@ class Application_Form_User extends Zend_Form
         $lastname->setLabel('Lastname')
                ->addFilter('StripTags')
                ->addFilter('StringTrim');
-               
-        $pwd = new Zend_Form_Element_Text('password');
+
+        $PasswordLenghtValidator = new Zend_Validate_StringLength(4, 32);
+        
+        $pwd = new Zend_Form_Element_Password('password');
         $pwd->setLabel('Password')
-              ->addFilter('StripTags')
-              ->addFilter('StringTrim');
+            ->addFilter('StripTags')
+            ->addFilter('StringTrim')
+            ->addValidator($PasswordLenghtValidator);
 
         $submit = new Zend_Form_Element_Submit('submit');
         $submit->setAttrib('id', 'btnSubmit');

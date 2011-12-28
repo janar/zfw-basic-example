@@ -17,8 +17,10 @@ class ProfileController extends Zend_Controller_Action
 
     public function registerAction()
     {
+        $message = "";
         $this->view->title = "Register";
         $this->view->headTitle($this->view->title);
+        $session = new Zend_Session_Namespace('profileController');
         
         $form = new Application_Form_Register();
         $form->submit->setLabel('Register');
@@ -28,11 +30,22 @@ class ProfileController extends Zend_Controller_Action
             if ($form->isValid($formData)) {
                 $users = new Application_Model_DbTable_Users();
                 $users->addUser($formData);
-                $this->_helper->redirector('index');
+                $session->registered = true;
+                $this->_helper->redirector('register', 'profile');
             } else {
+                $message = "There were a problem with registering. Please try again.";
                 $form->populate($formData);
             }
         }
+
+        $this->view->errorMessage = $message;
+        $this->view->registered = false;
+        if(isset($session->registered) && $session->registered)
+        {
+            $this->view->registered = true;
+        }
+
+        $session->registered = false;
     }
     
     public function loginAction()

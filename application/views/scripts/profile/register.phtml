@@ -1,3 +1,11 @@
+<?php if($this->errorMessage != ""){ ?>
+    <p class="msg-error"><?= $this->errorMessage; ?></p>
+<?php } ?>
+<?php if($this->registered){ ?>
+    <p class="msg-success">Your account has been setup.
+      You can now <a href="<?php echo $this->url(array('controller'=>'profile', 'action' => 'login'), 'default', true) ?>">Login</a>.
+    </p>
+<?php } ?>
 <div id="profile-register" class="form">
   <?php echo $this->form; ?>
 </div>

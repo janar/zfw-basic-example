@@ -25,10 +25,13 @@ class Application_Form_Register extends Zend_Form
                ->addValidator('NotEmpty')
                ->addValidator($emailValidator);
 
-        $pwd = new Zend_Form_Element_Text('password');
+        $PasswordLenghtValidator = new Zend_Validate_StringLength(4, 32);
+        
+        $pwd = new Zend_Form_Element_Password('password');
         $pwd->setLabel('Password')
-              ->setRequired(true)
-              ->addValidator('NotEmpty');
+            ->setRequired(true)
+            ->addValidator($PasswordLenghtValidator)
+            ->addValidator('NotEmpty');
 
         $submit = new Zend_Form_Element_Submit('submit');
         $submit->setAttrib('id', 'btnSubmit');
