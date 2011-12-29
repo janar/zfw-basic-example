@@ -2,19 +2,52 @@
 
 class Application_Form_User extends Zend_Form
 {
+    private $action = "insert";
+    private $userId = 0;
+    
+    public function __construct($options = null, $action = "insert", $userId = 0)
+    {
+        $this->action = $action;
+        $this->userId = $userId;
+        
+        parent::__construct($options);
+    }
+    
     public function init()
     {
         $this->setName('user');
-
         $id = new Zend_Form_Element_Hidden('id');
         $id->addFilter('Int');
 
+        if($this->action == "edit")
+        {
+            $emailValidator = new Zend_Validate_Db_NoRecordExists(
+                array(
+                    'table' => 'users',
+                    'field' => 'email',
+                    'exclude' => array(
+                        'field' => 'id',
+                        'value' => $this->userId
+                    )
+                )
+            );
+        } else
+        {
+            $emailValidator = new Zend_Validate_Db_NoRecordExists(
+                array(
+                    'table' => 'users',
+                    'field' => 'email'
+                )
+            );
+        }
+        
         $email = new Zend_Form_Element_Text('email');
         $email->setLabel('E-mail')
                ->setRequired(true)
                ->addFilter('StripTags')
                ->addFilter('StringTrim')
-               ->addValidator('NotEmpty');
+               ->addValidator('NotEmpty')
+               ->addValidator($emailValidator);
 
 
         $firstname = new Zend_Form_Element_Text('firstname');

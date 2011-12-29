@@ -51,8 +51,10 @@ class UsersController extends Zend_Controller_Action
     {
         $this->view->title = "Update user";
         $this->view->headTitle($this->view->title);
+
+        $id = $this->_getParam('id', 0);
         
-        $form = new Application_Form_User();
+        $form = new Application_Form_User(null, "edit", $id);
         $form->submit->setLabel('Update');
         $this->view->form = $form;
 
@@ -77,7 +79,6 @@ class UsersController extends Zend_Controller_Action
                 $form->populate($formData);
             }
         } else {
-            $id = $this->_getParam('id', 0);
             if ($id > 0) {
                 $users = new Application_Model_DbTable_Users();
                 $currentUserRecord = $users->getUser($id);
