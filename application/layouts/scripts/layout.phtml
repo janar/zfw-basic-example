@@ -2,45 +2,90 @@
 $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html;charset=utf-8');
 $this->headTitle()->setSeparator(' - ');
 $this->headTitle('Zend Framework (ZFW) basic example');
-
-echo $this->doctype(); ?>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
+?><!DOCTYPE html>
+<html lang="en">
+  <head>
     <?php echo $this->headMeta(); ?>
     <?php echo $this->headTitle(); ?>
-    <?php echo $this->headLink()->prependStylesheet($this->baseUrl().'/css/site.css'); ?>
-</head>
-<body>
-<div id="topmenu">
-    <a href="<?php echo $this->url(array('controller'=>'index'), 'default', true) ?>">Frontpage</a> |
-    <?php
-        if($this->showUsersLink)
-        {
-            ?>
-                <a href="<?php echo $this->url(array('controller'=>'users'), 'default', true) ?>">Manage users</a> |
-            <?php
-        }
-    ?>
-    <?php
-        if($this->hasIdentity)
-        {
-            ?>
-                <a href="<?php echo $this->url(array('controller'=>'profile', 'action' => 'index'), 'default', true) ?>">Profile</a> |
-                <a href="<?php echo $this->url(array('controller'=>'profile', 'action' => 'settings'), 'default', true) ?>">Profile Settings</a> |
-                <a href="<?php echo $this->url(array('controller'=>'profile', 'action' => 'logout'), 'default', true) ?>">Logout</a>
-            <?php
-        } else
-        {
-            ?>
-                <a href="<?php echo $this->url(array('controller'=>'profile', 'action' => 'register'), 'default', true) ?>">Register</a> |
-                <a href="<?php echo $this->url(array('controller'=>'profile', 'action' => 'login'), 'default', true) ?>">Login</a>
-            <?php
-        }
-    ?>
-</div>
-<div id="content">
-    <h1><?php echo $this->escape($this->title); ?></h1>
-    <?php echo $this->layout()->content; ?>
-</div>
-</body>
-</html>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <?php $this->headLink()->prependStylesheet($this->baseUrl().'/bootstrap/css/bootstrap.css'); ?>
+    <?php echo$this->headLink()->prependStylesheet($this->baseUrl().'/css/site.css'); ?>
+
+    <!-- support of HTML5 elements for IE6-8 -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="<?php echo $this->url(array('controller'=>'index'), 'default', true) ?>">ZFWBase</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <?php if($this->showUsersLink) { ?>
+                <?php $active = $this->controller == 'users' ? 'active' : '' ?>
+                <li class="<?php echo $active; ?>">
+                  <a href="<?php echo $this->url(array('controller'=>'users'), 'default', true) ?>">Manage users</a>
+                </li>
+              <?php } ?>
+              
+              <?php if($this->hasIdentity) { ?>
+                <?php $active = ($this->controller == 'profile' && $this->action == 'index') ? 'active' : '' ?>
+                <li class="<?php echo $active; ?>">
+                  <a href="<?php echo $this->url(array('controller'=>'profile', 'action' => 'index'), 'default', true) ?>">Profile</a>
+                </li>
+                <?php $active = ($this->controller == 'profile' && $this->action == 'settings') ? 'active' : '' ?>
+                <li class="<?php echo $active; ?>">
+                  <a href="<?php echo $this->url(array('controller'=>'profile', 'action' => 'settings'), 'default', true) ?>">Profile Settings</a>
+                </li>
+                <li class="">
+                  <a href="<?php echo $this->url(array('controller'=>'profile', 'action' => 'logout'), 'default', true) ?>">Logout</a>
+                </li>
+              <?php } else { ?>
+                <?php $active = ($this->controller == 'profile' && $this->action == 'register') ? 'active' : '' ?>
+                <li class="<?php echo $active; ?>">
+                  <a href="<?php echo $this->url(array('controller'=>'profile', 'action' => 'register'), 'default', true) ?>">Register</a>
+                </li>
+                <?php $active = ($this->controller == 'profile' && $this->action == 'login') ? 'active' : '' ?>
+                <li class="<?php echo $active; ?>">
+                  <a href="<?php echo $this->url(array('controller'=>'profile', 'action' => 'login'), 'default', true) ?>">Login</a>
+                </li>
+              <?php } ?>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+    
+    <div class="container">
+      
+      <div class="row">
+        <div class="span12">
+          <h2><?php echo $this->escape($this->title); ?></h2>
+           <?php echo $this->layout()->content; ?>
+        </div>
+      </div>
+
+      <hr>
+
+      <footer>
+        <p>&copy; Company <?php date('Y'); ?> | Frontend by <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap</a></p>
+      </footer>
+
+    </div>
+    <script type="text/javascript" src="<?php echo $this->baseUrl('bootstrap/js/bootstrap.min.js'); ?>"></script>
+
+  </body>
+</html> 

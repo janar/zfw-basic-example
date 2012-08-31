@@ -1,10 +1,11 @@
-Basic components and functionality implemented in Zend Framework using its provided example.
+Basic components and functionality implemented in Zend Framework using its provided example as base.
+Default "design" is based on famous front-end framework "twitter bootstrap" http://twitter.github.com/bootstrap
 
 This is currently very basic functionality and lot of things are missing.
 To see some of the code working online visti http://eagerfish.eu/projects/zfw-basic-example/public/
 
 
-To setup project you have to create database and import sql file found in folder /sql. It contains users table and admin record. Also /application/configs/application.ini file must be modified to fit your environment. 
+To setup project you have to create database and import sql file found in folder ./sql. It contains users table and admin record. Also ./application/configs/application.ini file and ./public/index.php must be modified to fit your environment. In index you have to point out where in your system Zend Framework lays. To make things look nice you should download front-end framework named twitter bootstrap from http://twitter.github.com/bootstrap and unzip it. Copy folders named js, img and css and paste them into your project folder ./public/bootstrap and you are set.
 
 
 To login as admin use:

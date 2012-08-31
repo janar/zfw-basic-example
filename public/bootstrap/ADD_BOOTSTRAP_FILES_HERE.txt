@@ -1,0 +1,5 @@
+Add bootstrap files here. Should contain fallowing folders
+
+js
+img
+css
