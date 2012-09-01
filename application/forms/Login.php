@@ -24,6 +24,7 @@ class Application_Form_Login extends Zend_Form
 
         $submit = new Zend_Form_Element_Submit('submit');
         $submit->setAttrib('id', 'btnSubmit');
+        $submit->setAttrib('class', 'btn btn-primary');
 
         $this->addElements(array($id, $email, $pwd, $submit));
     }
